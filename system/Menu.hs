@@ -26,7 +26,6 @@ menu main_tree = do
     if opcao == "1"
         then do
             main_tree <- createPerson main_tree
-            --putStr (firstName (main_list!!0))
             menu main_tree
         else if opcao == "3"
             then do
@@ -36,8 +35,17 @@ menu main_tree = do
                 getChar >>= putChar
                 showPerson (emOrdem main_tree)
                 menu main_tree
-            else if opcao == "0"
+            else if opcao == "4"
                 then do
                     clearScreen
-                    putStrLn "Sistema finalizado com sucesso!"
-                 else menu main_tree
+                    putStrLn "Buscar por: "
+                    query <- getLine
+                    let result = searchPerson query main_tree
+                    print (firstName result ++ " " ++ lastName result)
+                    getChar >>= putChar
+                    menu main_tree
+                else if opcao == "0"
+                    then do
+                        clearScreen
+                        putStrLn "Sistema finalizado com sucesso!"
+                     else menu main_tree

@@ -3,12 +3,13 @@ module ModelData where
 -- Installed modules
 import System.Console.ANSI -- ansi-terminal on cabal
 
-data Person = Person {
-    firstName :: String,
-    lastName :: String,
-    age :: String,
-    phoneNumber :: String
-} deriving (Show) 
+data Person = Nobody
+    | Person {
+        firstName :: String,
+        lastName :: String,
+        age :: String,
+        phoneNumber :: String
+    } deriving (Show) 
 
 data ArvBin element = Null
     | Node element (ArvBin element) (ArvBin element) deriving (Show)
@@ -41,3 +42,13 @@ showPerson (x:xs) = do
     putStrLn "Pressione qualquer tecla para continuar."
     getChar >>= putChar
     showPerson xs
+
+--searchPerson :: (Ord a) => (Tree a) -> a ->
+searchPerson _ Null = Nobody
+searchPerson x (Node y left right)
+    | x == firstName y = y
+    | x < firstName y = searchPerson x left
+    | x > firstName y = searchPerson x right
+
+getPersonNode Null = Nobody
+getPersonNode (Node y left right) = y
