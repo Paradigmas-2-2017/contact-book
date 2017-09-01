@@ -10,8 +10,9 @@ import ModelData
 -- Installed modules
 import System.Console.ANSI -- ansi-terminal on cabal
 
-createPerson :: IO()
-createPerson = do
+--createPerson :: Ord a => a -> IO a
+--createPerson actual_tree = do
+createPerson main_tree = do
     -- Defining strings to get their size and move cursor rightly
     let nameString = "Nome do contato: "
     let lastNameString = "Sobrenome do contato: "
@@ -36,31 +37,18 @@ createPerson = do
 
     let person = Person { firstName = auxFirstName, lastName = auxLastName, age = auxAge, phoneNumber = auxPhoneNumber }
     clearScreen
-    putStrLn "|======================| Informações do contato |======================|"
+    putStrLn "|======================| Cadastro de contato |======================|"
     putStrLn ("Nome: " ++ firstName person)
     putStrLn ("Sobrenome: " ++ lastName person)
     putStrLn ("Idade: " ++ age person)
     putStrLn ("Telefone: " ++ phoneNumber person)
     putStrLn ""
-    putStr "Confirmar cadastro? ('S' para SIM / 'N' para NÃO) "
-    opcao <- getLine
-    if opcao == "s" || opcao == "S"
-        then do
-            -- Aqui o contato é salvo no arquivo e inserido na árvore
-            clearScreen
-            putStrLn "Cadastro confirmado com sucesso!"
-            putStrLn "Pressione qualquer tecla para continuar."
-            getChar >>= putChar
-        else if opcao == "n" || opcao == "N"
-            then do
-                clearScreen
-                putStrLn "Cadastro cancelado com sucesso!"
-                putStrLn "Pressione qualquer tecla para continuar."
-                getChar >>= putChar
-            else do
-                clearScreen
-                putStrLn "Opção inválida, cadastro cancelado!"
-                putStrLn "Pressione qualquer tecla para continuar."
-                getChar >>= putChar
-
-    return ()
+    -- Aqui o contato é salvo no arquivo e inserido na árvore
+    -- let aux_tree = actual_tree
+    -- let actual_tree = newPerson person aux_tree
+    clearScreen
+    putStrLn "Cadastro confirmado com sucesso!"
+    putStrLn "Pressione qualquer tecla para continuar."
+    getChar >>= putChar
+    let new_tree = insertPersonTree person main_tree
+    return new_tree

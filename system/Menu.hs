@@ -11,8 +11,8 @@ import ModelData
 -- Installed modules
 import System.Console.ANSI -- ansi-terminal on cabal
 
-menu :: IO()
-menu = do
+--menu :: IO()
+menu main_tree = do
     clearScreen
     putStrLn "|======================| Menu |======================|"
     putStrLn "1 - Cadastrar contato"
@@ -23,10 +23,21 @@ menu = do
     putStrLn ""
     putStr "Opção: "
     opcao <- getLine
-    case opcao of
-        "1" -> createPerson >> menu
-        "2" -> menu
-        "3" -> menu
-        "4" -> menu
-        "0" -> clearScreen >> putStrLn "Sistema finalizado com sucesso!"
-        x -> menu
+    if opcao == "1"
+        then do
+            main_tree <- createPerson main_tree
+            --putStr (firstName (main_list!!0))
+            menu main_tree
+        else if opcao == "3"
+            then do
+                clearScreen
+                putStrLn "Os contatos serão exibidos em ordem alfabética."
+                putStrLn "Pressione qualquer tecla para continuar."
+                getChar >>= putChar
+                showPerson (emOrdem main_tree)
+                menu main_tree
+            else if opcao == "0"
+                then do
+                    clearScreen
+                    putStrLn "Sistema finalizado com sucesso!"
+                 else menu main_tree
