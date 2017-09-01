@@ -23,29 +23,29 @@ menu main_tree = do
     putStrLn ""
     putStr "Opção: "
     opcao <- getLine
-    if opcao == "1"
-        then do
+    case opcao of
+        "1" -> do
             main_tree <- createPerson main_tree
             menu main_tree
-        else if opcao == "3"
-            then do
-                clearScreen
-                putStrLn "Os contatos serão exibidos em ordem alfabética."
-                putStrLn "Pressione qualquer tecla para continuar."
-                getChar >>= putChar
-                showPerson (emOrdem main_tree)
-                menu main_tree
-            else if opcao == "4"
-                then do
-                    clearScreen
-                    putStrLn "Buscar por: "
-                    query <- getLine
-                    let result = searchPerson query main_tree
-                    print (firstName result ++ " " ++ lastName result)
-                    getChar >>= putChar
-                    menu main_tree
-                else if opcao == "0"
-                    then do
-                        clearScreen
-                        putStrLn "Sistema finalizado com sucesso!"
-                     else menu main_tree
+        "2" -> do
+            print "oi"
+        "3" -> do
+            clearScreen
+            putStrLn "Os contatos serão exibidos em ordem alfabética."
+            putStrLn "Pressione qualquer tecla para continuar."
+            getChar >>= putChar
+            showPerson (emOrdem main_tree)
+            menu main_tree
+        "4" -> do
+            clearScreen
+            putStr "Buscar por: "
+            query <- getLine
+            let result = searchPerson query main_tree
+            print (firstName result ++ " " ++ lastName result)
+            getChar >>= putChar
+            menu main_tree
+        "0" -> do
+            clearScreen
+            putStrLn "Sistema finalizado com sucesso!"
+        _ -> do
+            menu main_tree
