@@ -9,10 +9,10 @@ data Person = Nobody
         lastName :: String,
         age :: String,
         phoneNumber :: String
-    } deriving (Show) 
+    } deriving (Show, Read) 
 
 data ArvBin element = Null
-    | Node element (ArvBin element) (ArvBin element) deriving (Show)
+    | Node element (ArvBin element) (ArvBin element) deriving (Show, Read)
 
 --insert :: Ord a => a -> ArvBin a -> ArvBin a
 --insert x Null = (Node x Null Null)

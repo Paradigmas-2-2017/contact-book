@@ -7,6 +7,7 @@ import Control.Monad
 -- Personal modules
 import Crud
 import ModelData
+import File
 
 -- Installed modules
 import System.Console.ANSI -- ansi-terminal on cabal
@@ -26,6 +27,8 @@ menu main_tree = do
     case opcao of
         "1" -> do
             main_tree <- createPerson main_tree
+            removeIfExists "../database/contacts.txt"
+            writeFile "../database/contacts.txt" (show main_tree)
             menu main_tree
         "2" -> do
             print "oi"
