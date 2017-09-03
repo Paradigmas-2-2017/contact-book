@@ -21,6 +21,7 @@ data ArvBin element = Null
 --    | x < y = Node y (insert x left) right
 --    | otherwise = Node y left (insert x right)
 
+insertPersonTree :: Person -> ArvBin Person -> ArvBin Person
 insertPersonTree x Null = (Node x Null Null)
 insertPersonTree x (Node y left right)
     | firstName x == firstName y = (Node y left right)
@@ -52,3 +53,21 @@ searchPerson x (Node y left right)
 
 getPersonNode Null = Nobody
 getPersonNode (Node y left right) = y
+
+removePerson x (Node y left right) = do
+    let person = searchPerson x (Node y left right)    
+    let list = emOrdem (Node y left right)
+    let new_list = removeItem person list
+    let main_tree = insertPersonFromList new_list Null
+    return main_tree
+
+--insertPersonFromList :: [Person] -> ArvBin Person -> ArvBin Person
+insertPersonFromList [] x = return x
+insertPersonFromList (x:xs) y = do
+    let main_tree = insertPersonTree x y
+    insertPersonFromList xs main_tree
+
+removeItem _ [] = []
+removeItem x (y:ys)
+    | firstName x == firstName y = removeItem x ys
+    | otherwise = y : removeItem x ys

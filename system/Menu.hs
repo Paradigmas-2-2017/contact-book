@@ -31,7 +31,8 @@ menu main_tree = do
             writeFile "../database/contacts.txt" (show main_tree)
             menu main_tree
         "2" -> do
-            print "oi"
+            main_tree <- removePerson "John" main_tree
+            menu main_tree
         "3" -> do
             clearScreen
             putStrLn "Os contatos serão exibidos em ordem alfabética."
