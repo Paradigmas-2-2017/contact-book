@@ -38,9 +38,11 @@ menu main_tree = do
             --show (erasePerson toDelete main_tree)
             removeIfExists "../database/contacts.txt"
             writeFile "../database/contacts.txt" (show main_tree)
+            clearScreen
+            putStrLn "Contato deletado com sucesso!"
+            putStrLn "Pressione qualquer tecla para continuar."
             getChar >>= putChar
             menu main_tree
-
         "3" -> do
             clearScreen
             putStrLn "Os contatos serão exibidos em ordem alfabética."

@@ -32,25 +32,3 @@ emOrdem :: ArvBin Person -> [Person]
 emOrdem Null = []
 emOrdem (Node x left right) = (emOrdem left) ++ [x] ++ (emOrdem right)
 
---Receives a list of people and print on the screen
-showPerson :: [Person] -> IO ()
-showPerson [] = return ()
-showPerson (x:xs) = do
-    clearScreen
-    putStrLn "|======================| Contato |======================|"
-    putStrLn ("Nome: " ++ (firstName x))
-    putStrLn ("Sobrenome: " ++ (lastName x))
-    putStrLn ("Idade: " ++ (age x))
-    putStrLn ("Telefone: " ++ (phoneNumber x))
-    putStrLn ""
-    putStrLn "Pressione qualquer tecla para continuar."
-    getChar >>= putChar
-    showPerson xs
-
--- Receives a person's name and the main tree, return its instance of Person 
-searchPerson :: String -> ArvBin Person -> Person
-searchPerson _ Null = Nobody
-searchPerson x (Node y left right)
-    | x == firstName y = y
-    | x < firstName y = searchPerson x left
-    | x > firstName y = searchPerson x right
