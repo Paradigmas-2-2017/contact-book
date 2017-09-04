@@ -10,6 +10,7 @@ import System.Directory
 import Menu
 import ModelData
 
+main :: IO ()
 main = do
     doesFileExist "../database/contacts.txt" >>= \case -- Must use LambdaCase because doesFileExist return IO Bool
         True -> do

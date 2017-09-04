@@ -12,7 +12,7 @@ import File
 -- Installed modules
 import System.Console.ANSI -- ansi-terminal on cabal
 
---menu :: IO()
+menu :: ArvBin Person -> IO ()
 menu main_tree = do
     clearScreen
     putStrLn "|======================| Menu |======================|"
