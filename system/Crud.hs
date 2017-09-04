@@ -53,7 +53,12 @@ createPerson main_tree = do
     let new_tree = insertPersonTree person main_tree
     return new_tree
 
---removePerson :: String -> Arvbin a -> Arvbin a
+erasePerson :: String -> ArvBin Person -> IO (ArvBin Person)
+erasePerson x y = do
+    let result = remove x y
+    return result
+
+removePerson :: String -> ArvBin Person -> ArvBin Person 
 removePerson x Null = Null
 remove x (Node y left right)
     | x == firstName y = deletePerson (Node y left right)

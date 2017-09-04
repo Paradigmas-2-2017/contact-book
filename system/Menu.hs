@@ -31,7 +31,16 @@ menu main_tree = do
             writeFile "../database/contacts.txt" (show main_tree)
             menu main_tree
         "2" -> do
-            print "oi"
+            clearScreen
+            putStr "Nome do contato a ser deletado: "
+            toDelete <- getLine
+            main_tree <- (erasePerson toDelete main_tree)
+            --show (erasePerson toDelete main_tree)
+            removeIfExists "../database/contacts.txt"
+            writeFile "../database/contacts.txt" (show main_tree)
+            getChar >>= putChar
+            menu main_tree
+
         "3" -> do
             clearScreen
             putStrLn "Os contatos serão exibidos em ordem alfabética."
