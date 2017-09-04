@@ -53,7 +53,14 @@ menu main_tree = do
             putStr "Buscar por: "
             query <- getLine
             let result = searchPerson query main_tree
-            print (firstName result ++ " " ++ lastName result)
+            clearScreen
+            putStrLn ("|======================| Exibindo resultados para '" ++ query ++ "' |======================|")
+            putStrLn ("Nome: " ++ firstName result)
+            putStrLn ("Sobrenome: " ++ lastName result)
+            putStrLn ("Idade: " ++ age result)
+            putStrLn ("Telefone: " ++ phoneNumber result)
+            putStrLn ""
+            putStrLn "Pressione qualquer tecla para continuar."
             getChar >>= putChar
             menu main_tree
         "0" -> do
